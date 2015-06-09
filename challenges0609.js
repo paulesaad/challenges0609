@@ -16,19 +16,18 @@
 
 Array.prototype.groupBy = function(callback){
     return this.reduce(function(a, v, i, arr){
-    	if (!a[callback(v, i, arr)]){
-    		return a[callback(v, i, arr)] = [v]
-    	} else{
-    		return a[callback(v, i, arr)].push(v)
-    	}
+        if (!a[callback(v, i, arr)]){
+            a[callback(v, i, arr)] = []
+        }
+        a[callback(v, i, arr)].push(v)
+        return a
     }, {})
 }
 
-// var grouped = [1,2,3,4,5,6,7,8,9,10].groupBy(function(v, i, arr){
-//      return (v%2 === 0) ? 'even' : 'odd'
-// })
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].groupBy(function(v, i, arr) {
+    return (v % 2 === 0) ? 'even' : 'odd'
+})
 
-// console.log(grouped)
 
 //if callback resolves to even, push value to even array
 //if callback resolves to odd, push value to odd array
